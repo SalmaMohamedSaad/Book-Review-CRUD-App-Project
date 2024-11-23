@@ -1,0 +1,17 @@
+<% if(message){ %> <font color="green"> <%= message%></font><% } %> <%
+if(errmessage){ %><font color="red"> <%= errmessage%></font><% } %> <%
+if(user){%>
+<p>
+  <a href="/">Home</a>
+  <a href="/book/myBooks">My Books</a>
+  <a href="/book/newBook">Add New Book</a>
+  <a href="/auth/signout">Sign Out</a>
+</p>
+<h4>Welcome <%= user.username %></h4>
+<% }else{ %>
+<p>
+  <a href="/">Home</a>
+  <a href="/auth/signup">Sign Up</a>
+  <a href="/auth/newsignin">Sign In</a>
+</p>
+<%}%>

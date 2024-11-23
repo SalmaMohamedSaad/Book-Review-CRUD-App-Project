@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <title>Edit Book <%= book.title %></title>
+  </head>
+  <body>
+    <!-- views/books/new.ejs -->
+    <%- include('../partials/_navbar.ejs') %>
+
+    <h1>Edit Book <%= book.title %>!</h1>
+    <form action="/books/<%= book._id%>/update" method="POST">
+      <div class="checkbox-div">
+        <label for="title">Book Title:</label>
+        <input type="text" name="title" id="title" value="<%= book.title %>" />
+      </div>
+      <div class="checkbox-div">
+        <label for="author">Author:</label>
+        <input
+          type="text"
+          name="author"
+          id="author"
+          value="<%= book.author %>"
+        />
+      </div>
+      <div class="checkbox-div">
+        <label for="coverImage">Book Cover Image:</label>
+        <input
+          type="file"
+          name="coverImage"
+          id="coverImage"
+          value="<%= book.coverImage %>"
+        />
+        <img src="/uploads/<%= book.coverImage %>" width="59" height="59" />
+      </div>
+      <div class="checkbox-div">
+        <label for="numberOfPages">Number Of Pages:</label>
+        <input
+          type="number"
+          name="numberOfPages"
+          id="numberOfPages"
+          value="<%= book.numberOfPages %>"
+        />
+      </div>
+      <div class="checkbox-div">
+        <label for="description">Description:</label>
+        <textarea type="number" name="description" id="description">
+<%= book.description %></textarea
+        >
+      </div>
+      <button type="submit">Edit Book</button>
+    </form>
+  </body>
+</html>

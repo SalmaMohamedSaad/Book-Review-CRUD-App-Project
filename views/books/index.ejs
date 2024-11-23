@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <title>Books For Life</title>
+  </head>
+  <body>
+    <%- include('../partials/_navbar.ejs') %>
+    <table>
+      <tr>
+        <th>Title</th>
+        <th>Author</th>
+        <th>Cover Image</th>
+        <th>Number Of Pages</th>
+        <th>Rate</th>
+        <th>Description</th>
+        <th>Edit</th>
+        <th>Delete</th>
+      </tr>
+      <% books.forEach(book => { %>
+      <tr>
+        <td><%= book.title %></td>
+        <td><%= book.author %></td>
+        <td><%= book.coverImage %></td>
+        <td><%= book.numberOfPages %></td>
+        <td><%= book.rate %></td>
+        <td><%= book.description %></td>
+        <td><a href="/books/<%= book._id %>/show">Show</a></td>
+        <td><a href="/books/<%= book._id %>/delete">Delete</a></td>
+      </tr>
+      <% }); %>
+    </table>
+  </body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!--<link rel="stylesheet" href="/stylesheets/style.css" /> -->
+    <title>Add New Book</title>
+  </head>
+  <body>
+    <%- include('../partials/_navbar.ejs') %>
+
+    <h1>Add New Book!</h1>
+    <form action="/books/create" method="POST" enctype="multipart/form-data">
+      <div class="checkbox-div">
+        <label for="title">Book Title:</label>
+        <input type="text" name="title" id="title" />
+      </div>
+      <div class="checkbox-div">
+        <label for="author">Author:</label>
+        <input type="text" name="author" id="author" />
+      </div>
+      <div class="checkbox-div">
+        <label for="coverImage">Book Cover Image:</label>
+        <input type="file" name="coverImage" id="coverImage" />
+      </div>
+      <div class="checkbox-div">
+        <label for="numberOfPages">Number Of Pages:</label>
+        <input type="number" name="numberOfPages" id="numberOfPages" />
+      </div>
+      <div class="checkbox-div">
+        <label for="ststus">Status:</label>
+        <label for="public">Public</label>
+        <input type="radio" name="status" id="public" value="Public" />
+        <label for="private">Private</label>
+        <input type="radio" name="status" id="private" value="Private" />
+      </div>
+      <div class="checkbox-div">
+        <label for="description">Description:</label>
+        <textarea type="number" name="description" id="description"></textarea>
+      </div>
+      <input type="submit" value="Add Book" />
+    </form>
+  </body>
+</html>
