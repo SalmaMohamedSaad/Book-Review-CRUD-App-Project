@@ -1,5 +1,6 @@
 const express = require('express')
 const Book = require('../models/book')
+const Review = require('../models/review')
 const fs = require('fs')
 // Require the upload middleware
 const upload = require('../middleware/file-upload')
@@ -15,7 +16,7 @@ const index = async (req, res) => {
 }
 const myBooks = async (req, res) => {
   try {
-    const books = await Book.find({ ownerid: `${req.session.user._id}` })
+    const books = await Book.find({ ownerid: req.session.user._id })
     res.render('books/index.ejs', { books })
   } catch (error) {
     console.log(error)
@@ -47,8 +48,17 @@ const create = async (req, res) => {
 }
 const show = async (req, res) => {
   const id = req.params.id
+  let currentUser = ''
+  if (req.session.user && req.session.user._id) {
+    currentUser = req.session.user._id
+  }
+
   const book = await Book.findById(id)
-  res.render('books/show.ejs', { book })
+  const reviews = await Review.find({ bookid: id }).populate('ownerid')
+  // console.log('currentUser', currentUser)
+  // console.log('ownerid', book.ownerid)
+  // console.log('reviews', reviews)
+  res.render('books/show.ejs', { book, currentUser, reviews })
 }
 const edit = async (req, res) => {
   const id = req.params.id

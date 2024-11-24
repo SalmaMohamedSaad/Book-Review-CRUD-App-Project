@@ -50,7 +50,19 @@
         <label for="description">Description:</label>
         <div name="description" id="description"><%= book.description %></div>
       </div>
-      <a href="/books/<%= book._id %>/edit">Edit Book</a>
+      <% if(book.ownerid.toString()===currentUser.toString()){ %>
+      <a href="/books/<%= book._id %>/edit">Edit Book</a><%}%> <%
+      if(reviews){reviews.forEach(review=>{%>
+      <div>
+        <label>Review Title: </label><label><%=review.title %></label><br />
+        <label>User: </label><label><%=review.ownerid.username %></label><br />
+        <label>Review: </label> <%=review.description %><br />
+        <% if(review.ownerid._id.toString()===currentUser.toString()){ %>
+        <a href="/review/<%= review._id%>/deleteReview">Delete</a>
+        <a href="/review/<%= book._id%>/edit">Edit</a>
+        <%}%>
+      </div>
+      <%})}%>
     </form>
   </body>
 </html>

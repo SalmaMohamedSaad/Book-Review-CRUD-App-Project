@@ -12,13 +12,14 @@
     <%- include('./partials/_navbar.ejs') %> <% books.forEach(book => { %>
 
     <div class="container">
-      <img
-        src="/uploads/<%= book.coverImage %>"
-        width="100"
-        height="100"
-      /><br />
-      <label><%= book.title %></label><br />
-      <label><%= book.author %></label><br />
+      <a href="/books/<%= book._id %>/show">
+        <img
+          src="/uploads/<%= book.coverImage %>"
+          width="100"
+          height="100" /><br />
+        <label><%= book.title %></label><br />
+        <label><%= book.author %></label><br
+      /></a>
       <% if(user){%><a href="/review/<%= book._id %>/newReview"
         >Review This Book</a
       >

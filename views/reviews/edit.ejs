@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <title>Show Book <%= book.title %></title>
+  </head>
+  <body>
+    <!-- views/books/new.ejs -->
+    <%- include('../partials/_navbar.ejs') %>
+
+    <h1>Show Book <%= book.title %>!</h1>
+
+    <div class="checkbox-div">
+      <label for="title">Book Title:</label>
+      <input
+        type="text"
+        name="title"
+        id="title"
+        value="<%= book.title %>"
+        disabled
+      />
+    </div>
+    <div class="checkbox-div">
+      <label for="author">Author:</label>
+      <input
+        type="text"
+        name="author"
+        id="author"
+        value="<%= book.author %>"
+        disabled
+      />
+    </div>
+    <div class="checkbox-div">
+      <label for="coverImage">Book Cover Image:</label>
+      <img src="/uploads/<%= book.coverImage %>" width="100" height="100" />
+    </div>
+    <div class="checkbox-div">
+      <label for="numberOfPages">Number Of Pages:</label>
+      <input
+        type="number"
+        name="numberOfPages"
+        id="numberOfPages"
+        value="<%= book.numberOfPages %>"
+        disabled
+      />
+    </div>
+    <div class="checkbox-div">
+      <label for="description">Description:</label>
+      <div name="description" id="description"><%= book.description %></div>
+    </div>
+    <% if(book.ownerid.toString()===currentUser.toString()){ %>
+    <a href="/books/<%= book._id %>/edit">Edit Book</a><%}%> <%
+    if(reviews){reviews.forEach(review=>{%>
+    <div>
+      <% if(review.ownerid._id.toString()===currentUser.toString()){ %>
+      <a href="/review/<%= review._id %>/update">Hi</a>
+      <form method="post" action="/review/<%= review._id %>/update">
+        <label>Review Title: </label>
+        <input type="text" value="<%=review.title %>" name="title" /><br />
+        <label>User: </label><label><%=review.ownerid.username %></label>
+        <br />
+        <label>Review: </label>
+        <textarea name="description"><%=review.description %></textarea>
+        <br />
+        <input type="submit" value="Save" />
+      </form>
+      <%}else{%>
+      <label>Review Title: </label><label><%=review.title %></label><br />
+      <label>User: </label><label><%=review.ownerid.username %></label><br />
+      <label>Review: </label> <%=review.description %><br />
+      <% }%>
+    </div>
+    <%})}%>
+  </body>
+</html>

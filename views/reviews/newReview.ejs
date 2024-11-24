@@ -4,13 +4,13 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="/stylesheets/style.css" />
-    <title>Show Book <%= book.title %></title>
+    <title>Review Book <%= book.title %></title>
   </head>
   <body>
     <!-- views/books/new.ejs -->
     <%- include('../partials/_navbar.ejs') %>
 
-    <h1>Review Book <%= book.title %>!</h1>
+    <h1>Review <%= book.title %> Book!</h1>
 
     <div class="checkbox-div">
       <label for="title">Book Title:</label>
@@ -34,7 +34,7 @@
         <%= book.description %>
       </div>
     </div>
-    <form action="/reviews/<%= book._id%>/create" method="POST">
+    <form action="/review/<%= book._id%>/create" method="POST">
       <div class="checkbox-div">
         <label for="title">Review Title:</label>
         <input type="text" name="title" id="title" />
