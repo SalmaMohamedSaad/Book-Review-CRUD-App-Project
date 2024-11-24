@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <title>Show Book <%= book.title %></title>
+  </head>
+  <body>
+    <!-- views/books/new.ejs -->
+    <%- include('../partials/_navbar.ejs') %>
+
+    <h1>Review Book <%= book.title %>!</h1>
+
+    <div class="checkbox-div">
+      <label for="title">Book Title:</label>
+      <label><%= book.title %></label>
+    </div>
+    <div class="checkbox-div">
+      <label for="author">Author:</label>
+      <label><%= book.author %></label>
+    </div>
+    <div class="checkbox-div">
+      <label for="coverImage">Book Cover Image:</label>
+      <img src="/uploads/<%= book.coverImage %>" width="100" height="100" />
+    </div>
+    <div class="checkbox-div">
+      <label for="numberOfPages">Number Of Pages:</label>
+      <label><%= book.numberOfPages %></label>
+    </div>
+    <div class="checkbox-div">
+      <label for="description">Description:</label>
+      <div type="number" name="description" id="description">
+        <%= book.description %>
+      </div>
+    </div>
+    <form action="/reviews/<%= book._id%>/create" method="POST">
+      <div class="checkbox-div">
+        <label for="title">Review Title:</label>
+        <input type="text" name="title" id="title" />
+      </div>
+      <div class="checkbox-div">
+        <label for="description">Your Review:</label>
+        <textarea name="description" id="description"></textarea>
+      </div>
+      <input type="submit" value="Add Book" />
+    </form>
+  </body>
+</html>

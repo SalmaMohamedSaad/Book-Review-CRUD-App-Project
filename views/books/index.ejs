@@ -19,7 +19,7 @@
         <th>Edit</th>
         <th>Delete</th>
       </tr>
-      <% books.forEach(book => { %>
+      <% if (books){books.forEach(book => { %>
       <tr>
         <td><%= book.title %></td>
         <td><%= book.author %></td>
@@ -30,7 +30,9 @@
         <td><a href="/books/<%= book._id %>/show">Show</a></td>
         <td><a href="/books/<%= book._id %>/delete">Delete</a></td>
       </tr>
-      <% }); %>
+      <% })}else{%>
+      <div>No results were found</div>
+      <%} %>
     </table>
   </body>
 </html>

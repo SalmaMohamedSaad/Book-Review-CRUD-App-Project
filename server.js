@@ -14,6 +14,7 @@ const passUserToView = require('./middleware/pass-user-to-view')
 const path = require('path')
 const authRoute = require('./routes/auth')
 const bookRoute = require('./routes/book')
+const reviewRoute = require('./routes/review')
 
 const port = process.env.PORT ? process.env.PORT : '3000'
 mongoose.connect(process.env.MONGODB_URI)
@@ -29,6 +30,7 @@ app.use(morgan('dev'))
 app.use(
   session({
     secret: process.env.SESSION_SECRET,
+    cookie: { maxAge: 150000 },
     resave: false,
     saveUninitialized: true
   })
@@ -56,6 +58,7 @@ app.use((req, res, next) => {
 // Using application routs
 app.use(authRoute)
 app.use(bookRoute)
+app.use(reviewRoute)
 
 app.listen(port, () => {
   console.log(`The express app is ready on port ${port}`)

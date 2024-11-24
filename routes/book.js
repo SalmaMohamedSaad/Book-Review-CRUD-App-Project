@@ -14,6 +14,13 @@ route.post(
   Upload.single('coverImage'),
   bookController.create
 )
+route.post(
+  '/books/:id/update',
+  isSignIn,
+  Upload.single('coverImage'),
+  bookController.update
+)
 route.get('/books/:id/show', isSignIn, bookController.show)
+route.get('/books/:id/edit', isSignIn, bookController.edit)
 route.get('/books/:id/delete', isSignIn, bookController.deleteBook)
 module.exports = route

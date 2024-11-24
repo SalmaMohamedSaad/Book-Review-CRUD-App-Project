@@ -1,5 +1,4 @@
 const express = require('express')
-const router = express.Router()
 const User = require('../models/user')
 const bcrypt = require('bcrypt')
 
@@ -63,13 +62,3 @@ module.exports = {
   signupSubmit,
   signout
 }
-
-// router.get('/sign-in', (req, res) => {
-//   res.render('auth/sign-in.ejs')
-// })
-
-// router.get('/sign-out', (req, res) => {
-//   req.session.destroy()
-//   res.redirect('/')
-// })
-// module.exports = router

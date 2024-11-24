@@ -1,33 +1,67 @@
 const express = require('express')
-const router = express.Router()
 const Book = require('../models/book')
 const fs = require('fs')
 // Require the upload middleware
 const upload = require('../middleware/file-upload')
 
 const index = async (req, res) => {
-  const books = await Book.find()
-  res.render('index.ejs', { books })
+  try {
+    const books = await Book.find()
+    res.render('index.ejs', { books })
+  } catch (error) {
+    console.log(error)
+    res.redirect('/')
+  }
 }
 const myBooks = async (req, res) => {
-  const books = await Book.find({ ownerid: `${req.session.user._id}` })
-  res.render('books/index.ejs', { books })
+  try {
+    const books = await Book.find({ ownerid: `${req.session.user._id}` })
+    res.render('books/index.ejs', { books })
+  } catch (error) {
+    console.log(error)
+    res.redirect('/')
+  }
 }
 const newBook = async (req, res) => {
-  res.render('books/newBook.ejs')
+  try {
+    res.render('books/newBook.ejs')
+  } catch (error) {
+    console.log(error)
+    req.session.errmessage = 'Please try again later ........'
+    res.redirect('/')
+  }
 }
 const create = async (req, res) => {
-  req.body.coverImage = req.file.filename
-  //console.log('===================>>>', req.session.user._id)
-  req.body.ownerid = req.session.user._id
-  await Book.create(req.body)
+  try {
+    req.body.coverImage = req.file.filename
+    //console.log('===================>>>', req.session.user._id)
+    req.body.ownerid = req.session.user._id
+    await Book.create(req.body)
 
-  res.redirect('/book/myBooks')
+    res.redirect('/book/myBooks')
+  } catch (error) {
+    console.log(error)
+    req.session.errmessage = 'Please try again later ........'
+    res.redirect('/')
+  }
 }
 const show = async (req, res) => {
   const id = req.params.id
   const book = await Book.findById(id)
   res.render('books/show.ejs', { book })
+}
+const edit = async (req, res) => {
+  const id = req.params.id
+  const book = await Book.findById(id)
+  res.render('books/edit.ejs', { book })
+}
+const update = async (req, res) => {
+  const id = req.params.id
+  req.body.coverImage = req.file.filename
+  const bookRecord = await Book.findById(id)
+  fs.unlinkSync(`./public/uploads/${bookRecord.coverImage}`)
+  await Book.findByIdAndUpdate(id, req.body)
+  res.redirect('/book/myBooks')
 }
 const deleteBook = async (req, res) => {
   const id = req.params.id
@@ -42,5 +76,7 @@ module.exports = {
   newBook,
   create,
   show,
+  edit,
+  update,
   deleteBook
 }
