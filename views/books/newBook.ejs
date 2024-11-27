@@ -8,37 +8,61 @@
   </head>
   <body>
     <%- include('../partials/_navbar.ejs') %>
+    <div class="card bg-light border-0 h-100">
+      <div class="card-body text-center col-sm-12">
+        <h1>Add New Book!</h1>
+        <form
+          action="/books/create"
+          method="POST"
+          enctype="multipart/form-data"
+          class="form-horizontal"
+        >
+          <div class="form-group">
+            <label class="control-label col-sm-2" for="title"
+              >Book Title:</label
+            >
+            <input type="text" name="title" id="title" />
+          </div>
+          <br />
+          <div class="form-group">
+            <label class="control-label col-sm-2" for="author">Author:</label>
+            <input type="text" name="author" id="author" />
+          </div>
+          <br />
+          <div class="form-group">
+            <label class="control-label col-sm-3" for="coverImage"
+              >Book Cover Image:</label
+            >
+            <input type="file" name="coverImage" id="coverImage" />
+          </div>
+          <br />
+          <div class="form-group">
+            <label class="control-label col-sm-2" for="numberOfPages"
+              >Number Of Pages:</label
+            >
+            <input type="number" name="numberOfPages" id="numberOfPages" />
+          </div>
+          <br />
+          <div class="radio">
+            <label class="control-label col-sm-3" for="ststus">Status:</label>
 
-    <h1>Add New Book!</h1>
-    <form action="/books/create" method="POST" enctype="multipart/form-data">
-      <div class="checkbox-div">
-        <label for="title">Book Title:</label>
-        <input type="text" name="title" id="title" />
+            <input type="radio" name="status" id="public" value="Public" />
+            <label class="control-label col-sm-1" for="public">Public</label>
+
+            <input type="radio" name="status" id="private" value="Private" />
+            <label class="control-label col-sm-1" for="private">Private</label>
+          </div>
+          <br />
+          <div class="form-group">
+            <label class="control-label col-sm-2" for="description"
+              >Description:</label
+            >
+            <textarea name="description" id="description"></textarea>
+          </div>
+          <br />
+          <input type="submit" value="Add Book" />
+        </form>
       </div>
-      <div class="checkbox-div">
-        <label for="author">Author:</label>
-        <input type="text" name="author" id="author" />
-      </div>
-      <div class="checkbox-div">
-        <label for="coverImage">Book Cover Image:</label>
-        <input type="file" name="coverImage" id="coverImage" />
-      </div>
-      <div class="checkbox-div">
-        <label for="numberOfPages">Number Of Pages:</label>
-        <input type="number" name="numberOfPages" id="numberOfPages" />
-      </div>
-      <div class="checkbox-div">
-        <label for="ststus">Status:</label>
-        <label for="public">Public</label>
-        <input type="radio" name="status" id="public" value="Public" />
-        <label for="private">Private</label>
-        <input type="radio" name="status" id="private" value="Private" />
-      </div>
-      <div class="checkbox-div">
-        <label for="description">Description:</label>
-        <textarea name="description" id="description"></textarea>
-      </div>
-      <input type="submit" value="Add Book" />
-    </form>
+    </div>
   </body>
 </html>
