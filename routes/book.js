@@ -6,6 +6,7 @@ const isSignIn = require('../middleware/is-signed-in')
 const passUserToView = require('../middleware/pass-user-to-view')
 
 route.get('/', bookController.index)
+route.post('/search', bookController.search)
 route.get('/book/myBooks', isSignIn, bookController.myBooks)
 route.get('/book/newBook', isSignIn, bookController.newBook)
 route.post(

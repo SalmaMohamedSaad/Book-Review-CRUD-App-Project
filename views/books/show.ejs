@@ -85,7 +85,8 @@
           <% if(book.ownerid.toString()===currentUser.toString()){ %>
           <a href="/books/<%= book._id %>/edit">Edit Book</a><%}%> <%
           if(reviews){reviews.forEach(review=>{%>
-          <div class="form-group">
+          <br />
+          <div class="form-group comment_div">
             <label class="control-label col-sm-2">Review Title: </label
             ><label class="control-label col-sm-8"><%=review.title %></label
             ><br />

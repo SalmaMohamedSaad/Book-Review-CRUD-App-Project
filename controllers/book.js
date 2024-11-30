@@ -4,10 +4,29 @@ const Review = require('../models/review')
 const fs = require('fs')
 // Require the upload middleware
 const upload = require('../middleware/file-upload')
+const { log } = require('console')
 
 const index = async (req, res) => {
   try {
-    const books = await Book.find()
+    const books = await Book.find({ status: 'Public' })
+    res.render('index.ejs', { books })
+  } catch (error) {
+    console.log(error)
+    res.redirect('/')
+  }
+}
+const search = async (req, res) => {
+  try {
+    const books = await Book.find({
+      status: 'Public',
+      $or: [
+        // to search in both title or author fileds
+        { title: new RegExp(req.body.search, 'i') }, // i is to make the search criteria case insensitive
+        { author: new RegExp(req.body.search, 'i') } //
+      ]
+    })
+    // console.log('Search Criteria===============>>>', req.body.search)
+    // console.log('Search Result===============>>>', books)
     res.render('index.ejs', { books })
   } catch (error) {
     console.log(error)
@@ -82,6 +101,7 @@ const deleteBook = async (req, res) => {
 }
 module.exports = {
   index,
+  search,
   myBooks,
   newBook,
   create,

@@ -11892,3 +11892,9 @@ fieldset:disabled .btn {
   width: 4rem;
   font-size: 2rem;
 }
+.comment_div {
+  background: #d6eaf8;
+  width: 60%;
+  padding: 10px;
+  display: block;
+}
