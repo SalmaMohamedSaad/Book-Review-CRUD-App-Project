@@ -46,4 +46,16 @@ const deleteReview = async (req, res) => {
   const reviewRecord = await Review.findByIdAndDelete(id)
   res.redirect('back')
 }
-module.exports = { newReview, create, deleteReview, edit, update }
+const likeReview = async (req, res) => {
+  try {
+    console.log('===========', req.params.id)
+    await Review.findByIdAndUpdate(req.params.id, {
+      $push: { favoritedByUsers: req.session.user._id }
+    })
+    res.redirect('back')
+  } catch (err) {
+    console.log(err)
+    res.redirect('/')
+  }
+}
+module.exports = { newReview, create, deleteReview, edit, update, likeReview }

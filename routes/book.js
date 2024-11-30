@@ -24,4 +24,6 @@ route.post(
 route.get('/books/:id/show', bookController.show)
 route.get('/books/:id/edit', isSignIn, bookController.edit)
 route.get('/books/:id/delete', isSignIn, bookController.deleteBook)
+route.get('/books/:id/likeBook', isSignIn, bookController.likeBook)
+
 module.exports = route

@@ -99,6 +99,17 @@ const deleteBook = async (req, res) => {
   await Book.findByIdAndDelete(id)
   res.redirect('/book/myBooks')
 }
+const likeBook = async (req, res) => {
+  try {
+    await Book.findByIdAndUpdate(req.params.id, {
+      $push: { favoritedByUsers: req.session.user._id }
+    })
+    res.redirect('/')
+  } catch (err) {
+    console.log(err)
+    res.redirect('/')
+  }
+}
 module.exports = {
   index,
   search,
@@ -108,5 +119,6 @@ module.exports = {
   show,
   edit,
   update,
-  deleteBook
+  deleteBook,
+  likeBook
 }

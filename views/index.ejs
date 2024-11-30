@@ -1,6 +1,6 @@
 <%- include('./partials/_navbar.ejs') %>
 <div class="jumbotron text-center">
-  <h1>Welcome to Books for Life App.</h1>
+  <h1>Welcome to Book Review App.</h1>
   <h3>Your gate to grate books</h3>
 </div>
 <div class="container">
@@ -12,13 +12,26 @@
           <img src="/uploads/<%= book.coverImage %>" style="width: 60%" />
           <div class="caption">
             <label><%= book.title %></label>
-            <label><%= book.author %></label>
           </div>
         </a>
+        <label
+          ><% if(book.favoritedByUsers.length>0) {%>
+          <%=book.favoritedByUsers.length %>
+          <i class="bi bi-hand-thumbs-up-fill" style="color: #2874a6"></i
+          ><%}%></label
+        >
         <% if(user){%><a
           href="/review/<%= book._id %>/newReview"
-          class="btn btn-primary"
+          class="btn btn-primary btn-sm"
           >Review This Book</a
+        >
+
+        <a
+          href="/books/<%= book._id %>/likeBook"
+          class="btn btn-primary btn-sm"
+        >
+          <i class="bi bi-hand-thumbs-up-fill" style="color: #fbfcfd"></i>
+          Like</a
         >
         <%}%>
       </div>

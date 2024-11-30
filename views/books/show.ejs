@@ -94,7 +94,18 @@
             ><label><%=review.ownerid.username %></label><br />
             <label class="control-label col-sm-2">Review: </label>
             <div class="col-sm-8"><%=review.description %><br /></div>
-            <% if(review.ownerid._id.toString()===currentUser.toString()){ %>
+            <% if(review.favoritedByUsers.length>0){%> <%=
+            review.favoritedByUsers.length %>
+            <i class="bi bi-hand-thumbs-up-fill" style="color: #2874a6"></i
+            ><%}%> <% if(user){%>
+            <a
+              href="/review/<%= review._id %>/likeReview"
+              class="btn btn-primary btn-sm"
+            >
+              <i class="bi bi-hand-thumbs-up-fill" style="color: #fbfcfd"></i>
+              Like</a
+            ><% }%> <%
+            if(review.ownerid._id.toString()===currentUser.toString()){ %>
             <a href="/review/<%= review._id%>/deleteReview">Delete</a>
             <a href="/review/<%= book._id%>/edit">Edit</a>
             <%}%>
